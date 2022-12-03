@@ -3,15 +3,15 @@ Tournament brackets
 
 # Run in local API
 
-Change Path to api folder
-run npm install
-run npm start
-node server will run on port::3080
+Change Path to api folder<br />
+run npm install<br />
+run npm start<br />
+node server will run on port::3080<br />
 
 
 # Run in local UI
 
-Change Path to tournaments-brackets folder
-run npm install
-run ng serve
-UI will run on port::4200
+Change Path to tournaments-brackets folder<br />
+run npm install<br />
+run ng serve<br />
+UI will run on port::4200<br />
