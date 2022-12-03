@@ -1,0 +1,65 @@
+<div class="card-deck align-middle col-2 d-inline-block" *ngFor="let r of roundDetails;">
+  <ng-container *ngIf="!declareWinner && (r.roundNo <= currentRound)">
+    <div
+    class="card text-white bg-dark m-4 mr-4 h-1" *ngFor="let match of r.matches; let ind = index;  ">
+      <ng-container>
+        <div class="card-header" pTooltip="Goals: 3; Assists: 90"  tooltipPosition="top" [ngClass]="{
+          'text-danger': error && !r.winners[ind]
+      }" [ngSwitch]="r.teams.length">
+      <span *ngSwitchCase="'16'">League {{ind + 1}} </span>
+      <span *ngSwitchCase="'8'">Quarter Final {{ind + 1}} </span>
+      <span *ngSwitchCase="'4'">Semi Final {{ind + 1}} </span>
+      <span *ngSwitchCase="'2'">Final</span>
+    </div>
+        <div class="card-body text-center p-0" *ngIf="ind < 1">
+
+
+          <mat-button-toggle-group vertical="true" name="fontStyle" aria-label="Font Style"
+            [(ngModel)]="r.winners[ind]">
+            <mat-button-toggle class="p-0" [ngClass]="{
+                'text-success': r.winners[ind] === r.teams[ind].name
+            }" class="card-title" value="{{r.teams[ind].name}}">{{r.teams[ind].name}}
+            </mat-button-toggle>
+            <mat-button-toggle class="p-0" [ngClass]="{
+                'text-success': r.winners[ind] === r.teams[ind+1].name
+            }" value="{{r.teams[ind+1].name}}"> {{r.teams[ind+1].name}}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <div class="card-body text-center  p-0" *ngIf="ind >= 1">
+          <mat-button-toggle-group vertical="true" name="fontStyle" aria-label="Font Style"
+            [(ngModel)]="r.winners[ind]">
+            <mat-button-toggle class="p-0" [ngClass]="{
+                'text-success': r.winners[ind] === r.teams[ind * 2].name
+                }" class="card-title" value="{{r.teams[ind * 2].name}}">
+              {{r.teams[ind * 2].name}}</mat-button-toggle>
+            <mat-button-toggle class="p-0" [ngClass]="{
+                'text-success': r.winners[ind] === r.teams[ind * 2+1].name
+                }" value="{{r.teams[ind * 2 + 1].name}}"> {{r.teams[ind * 2 + 1].name}}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+
+        </div>
+      </ng-container>
+      <div class="card-footer">
+        <small class="text-muted">Match {{ind + 1}} Round {{r.roundNo}}</small>
+      </div>
+    </div>
+
+  </ng-container>
+  <ng-container *ngIf="r.roundNo === currentRound">
+    <button class="btn btn-success m-3 mh-4 position-absolute align-middle col-2 d-inline-block"
+      (click)="completeRound()">Complete
+      Round</button>
+  </ng-container>
+</div>
+
+<div *ngIf="declareWinner">
+  <div class="card m-4 mr-4 h-1">
+      <div class="card-header text-success" >{{winnerName}} Congratulation  on winning Tournamnet</div>
+  </div>
+
+</div>
+
+

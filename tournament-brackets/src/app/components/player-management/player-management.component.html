@@ -1,0 +1,30 @@
+<p-accordion class="col-6 m-2" *ngIf="qualifiedTeams && qualifiedTeams.length>0">
+  <p-accordionTab header="{{group.key}}" *ngFor="let group of grouped | keyvalue">
+    <p-accordion>
+      <p-accordionTab header="Players Count ({{team.players.length}})" *ngFor="let team of group.value">
+        <pre>
+                  <table class="table table-hover">
+                    <thead>
+                      <tr class="col-12">
+                        <th scope="col-4" scope="col">Name</th>
+                        <th scope="col-4"  scope="col">Gender</th>
+                        <th scope="col-4"  scope="col">DOB</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr class="col-12 mb-2" *ngFor="let player of team.players; let i = index">
+                        <td class="col-4">{{player.firstName}} {{player.lastName}}</td>
+                        <td class="col-4"> {{player.gender}}</td>
+                        <td>{{player.dateOfBirth | date }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button (click)="addPlayer(team)" class="btn btn-success">Add Players</button>
+              </pre>
+      </p-accordionTab>
+    </p-accordion>
+  </p-accordionTab>
+
+</p-accordion>
+
+
